@@ -11,6 +11,7 @@ import com.gitgud.homelesshelper.R;
 public class WelcomeActivity extends AppCompatActivity {
 
     private Button loginButton;
+    private Button registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,15 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
+            }
+        });
+
+        registerButton = (Button) findViewById(R.id.buttonRegister);
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(WelcomeActivity.this, RegisterActivity.class));
             }
         });
     }
