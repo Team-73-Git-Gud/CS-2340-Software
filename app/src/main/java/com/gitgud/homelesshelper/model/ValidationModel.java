@@ -4,6 +4,9 @@ import android.support.compat.BuildConfig;
 
 import com.gitgud.homelesshelper.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by collin on 2/13/18.
  */
@@ -17,34 +20,16 @@ public class ValidationModel {
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
      */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-
-
+    private ArrayList<String> dummyCredentials;
 
     /**
      * Make a new model
      */
     private ValidationModel() {
-
+        dummyCredentials = new ArrayList<>(Arrays.asList( "HelloWorld@gmail.com:foobar", "Main@gmail.com:integer", "Torvalds:opensourceordeath"));
+    }
+    public Boolean checkAgainstAccounts(/* May have variable args */) {
+        return false;
     }
 
-
-    /**
-     * populate the model with some dummy data.  The full app would not require this.
-     * comment out when adding new courses functionality is present.
-     */
-    private void loadDummyData() {
-
-    }
-
-    /**
-     * Replace an existing students data with new data
-     *
-     * @param student the student being edited
-     */
-    public void replaceStudentData() {
-
-    }
 }
