@@ -48,7 +48,11 @@ public class LoginActivity extends AppCompatActivity {
         dummyCredentials = new ArrayList<>(Arrays.asList( "HelloWorld@gmail.com:foobar", "Main@gmail.com:integer", "Torvalds:opensourceordeath"));
 
         // Set up the Username form.
+<<<<<<< HEAD
+        mEmailView = findViewById(R.id.email);
+=======
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.username);
+>>>>>>> 9f1fcc84697d988585b7f9a640a4ff0f3a4802a7
 
         // Set up the Password form.
         mPasswordView = (EditText) findViewById(R.id.password);
