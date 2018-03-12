@@ -59,8 +59,7 @@
                 android:inputType="textVisiblePassword"
                 android:maxLines="1"
                 tools:layout_editor_absoluteX="136dp"
-                tools:layout_edieleted:    app/src/main/java/com/gitgud/homelesshelper/model/MainModel.java
-        deleted:    app/src/mtor_absoluteY="42dp" />
+                tools:layout_editor_absoluteY="42dp" />
 
             <Button
                 android:id="@+id/registerButton"
