@@ -35,7 +35,6 @@ import java.util.List;
 
 import com.gitgud.homelesshelper.R;
 import com.gitgud.homelesshelper.model.User;
-import com.gitgud.homelesshelper.model.ValidationModel;
 
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -68,18 +67,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private Button mBackButtonView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Set up the login form.
+        mLoginFormView = findViewById(R.id.login_form);
+        mProgressView = findViewById(R.id.login_progress);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mPasswordView = (EditText) findViewById(R.id.password);
+        mBackButtonView =  findViewById(R.id.back_button);
+
+
         populateAutoComplete();
 
         // Initialize login request with autocomplete data
-        mPasswordView = (EditText) findViewById(R.id.password);
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
         @Override
@@ -101,8 +107,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        mBackButtonView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
+
+
     }
 
     private void populateAutoComplete() {
