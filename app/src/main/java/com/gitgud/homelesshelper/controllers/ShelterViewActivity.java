@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.gitgud.homelesshelper.R;
@@ -37,6 +38,14 @@ public class ShelterViewActivity extends AppCompatActivity {
         shelterRecycle = (RecyclerView) findViewById(R.id.ShelterListView);
         shelterRecycle.setAdapter(new ShelterRecyclerViewAdapter(Shelter.getShelterList()));
 
+        //Search Activity Start
+        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ShelterViewActivity.this, ShelterSearchActivity.class);
+            }
+        });
     }
 
     public class ShelterRecyclerViewAdapter extends RecyclerView.Adapter<ShelterRecyclerViewAdapter.ViewHolder> {

@@ -81,10 +81,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView = (EditText) findViewById(R.id.password);
         mBackButtonView =  findViewById(R.id.back_button);
 
-
         populateAutoComplete();
-
-        // Initialize login request with autocomplete data
 
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
@@ -113,9 +110,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 finish();
             }
         });
-
-
-
 
     }
 
@@ -203,12 +197,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             focusView = mEmailView;
             cancel = true;
         }
-        /*
-        else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
-        } */
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
