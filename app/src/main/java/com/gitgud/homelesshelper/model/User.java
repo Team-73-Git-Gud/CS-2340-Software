@@ -32,6 +32,7 @@ public class User {
         this.id = id;
         this.usernamelist = new ArrayList<String>();
         this.passwordlist = new ArrayList<String>();
+
     }
 
     public String getUserName() {

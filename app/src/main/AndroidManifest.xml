@@ -29,6 +29,10 @@
             android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".controllers.RegisterActivity"
+            android:label="@string/title_activity_registration"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".controllers.DashboardActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -37,13 +41,15 @@
             android:label="@string/title_activity_shelter_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".controllers.ShelterSearchActivity"
+            android:label="@string/app_name"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".controllers.ShelterDetailActivity"
             android:label="@string/title_activity_shelter_detail"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".controllers.RegisterActivity"
-            android:label="@string/title_activity_registration"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

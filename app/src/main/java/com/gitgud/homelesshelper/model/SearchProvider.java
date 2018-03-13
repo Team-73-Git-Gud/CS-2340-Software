@@ -10,11 +10,7 @@ public class SearchProvider {
     private static ArrayList<Shelter> result;
 
     public static void search(ArrayList<Shelter> list, String nameField, String genderField, String ageField) {
-        if (!result.isEmpty()) {
-            result = null;
-        } else {
-            result = new ArrayList<>(list);
-        }
+        result = new ArrayList<>(list);
 
         for (Shelter obj: list) {
             if (nameField != null) {

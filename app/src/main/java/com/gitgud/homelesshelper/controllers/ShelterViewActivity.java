@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,17 +30,31 @@ public class ShelterViewActivity extends AppCompatActivity {
     RecyclerView shelterRecycle;
     private RecyclerView.LayoutManager layoutManager;
 
+    private Button mSearchButton;
+
+    private ArrayList<Shelter> list = Shelter.getShelterList();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter_view);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SearchProvider searchProvider = new SearchProvider();
-
         shelterRecycle = (RecyclerView) findViewById(R.id.ShelterListView);
-        shelterRecycle.setAdapter(new ShelterRecyclerViewAdapter(Shelter.getShelterList()));
+        final ShelterRecyclerViewAdapter shelterAdapter = new ShelterRecyclerViewAdapter(list);
+        shelterRecycle.setAdapter(shelterAdapter);
+
+        mSearchButton = findViewById(R.id.search_activity_button);
+        mSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ShelterViewActivity.this, ShelterSearchActivity.class));
+                list = SearchProvider.getSearchResult();
+                shelterAdapter.notifyDataSetChanged();
+            }
+        });
 
     }
 
@@ -88,6 +103,16 @@ public class ShelterViewActivity extends AppCompatActivity {
             });
 
 
+        }
+
+        public void updates(ArrayList<Shelter> input)
+        {
+            if(input == null || input.size()==0)
+                return;
+            if (shelterList != null && shelterList.size()>0)
+                shelterList.clear();
+            shelterList.addAll(input);
+            notifyDataSetChanged();
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {

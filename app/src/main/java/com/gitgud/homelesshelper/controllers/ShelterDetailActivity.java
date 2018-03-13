@@ -57,7 +57,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
         }
         name.setText(name.getText() + "  " + shelter.getName());
         capacity.setText(capacity.getText() + "  " + shelter.getCapacity());
-        restriction.setText(restriction.getText() + "  " + shelter.getrestriction());
+        restriction.setText(restriction.getText() + "  " + shelter.getRestriction());
         address.setText(address.getText() + "  " + shelter.getAddress());
         longitude.setText(longitude.getText() + "  " + shelter.getLongitude());
         latitude.setText(latitude.getText() + "  " + shelter.getLatitude());
