@@ -38,6 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class DashboardActivity extends AppCompatActivity{
     private Button logoutButton;
     private Button viewShelterButton;
+    private Button viewSearchButton;
     private  CSVParser stuff;
     private TextView type;
     private TextView name;
@@ -72,6 +73,14 @@ public class DashboardActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DashboardActivity.this, ShelterViewActivity.class));
+            }
+        });
+
+        viewSearchButton = (Button)findViewById(R.id.gotosearch);
+        viewSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this, ShelterSearchActivity.class));
             }
         });
 
