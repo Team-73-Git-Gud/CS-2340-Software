@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.gitgud.homelesshelper.R;
+import com.gitgud.homelesshelper.model.SearchProvider;
 import com.gitgud.homelesshelper.model.Shelter;
 
 import org.w3c.dom.Text;
@@ -34,6 +35,8 @@ public class ShelterViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shelter_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        SearchProvider searchProvider = new SearchProvider();
 
         shelterRecycle = (RecyclerView) findViewById(R.id.ShelterListView);
         shelterRecycle.setAdapter(new ShelterRecyclerViewAdapter(Shelter.getShelterList()));

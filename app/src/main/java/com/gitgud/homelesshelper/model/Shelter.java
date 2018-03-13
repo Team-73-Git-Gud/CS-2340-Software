@@ -59,7 +59,7 @@ public class Shelter {
         return capacity;
     }
 
-    public String getrestriction() {
+    public String getRestriction() {
         return restriction;
     }
 

@@ -259,6 +259,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+//Remove this
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this,
@@ -311,7 +312,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
     }
-
+//until here
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -344,10 +345,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     return pieces[1].equals(mPassword);
                 }
             }
-
-            // TODO: register the new account here.
-
-
             return true;
         }
 
