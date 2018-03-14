@@ -1,7 +1,9 @@
 package com.gitgud.homelesshelper.controllers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +15,8 @@ import com.gitgud.homelesshelper.model.AgeEnum;
 import com.gitgud.homelesshelper.model.GenderEnum;
 import com.gitgud.homelesshelper.model.SearchProvider;
 import com.gitgud.homelesshelper.model.Shelter;
+
+import java.util.ArrayList;
 
 /**
  * Created by collin on 3/12/18.
@@ -53,8 +57,13 @@ public class ShelterSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // tell search provider to search and store result
-                SearchProvider.search(Shelter.getShelterList(), mNameView.getText().toString(), mGenderView.getSelectedItem().toString(), mAgeView.getSelectedItem().toString());
-                finish();
+                //(mGenderView.getSelectedItem())
+                Log.d("PARA", "--------------------");
+                Log.d("PARA", mNameView.getText().toString());
+                Log.d("PARA", mGenderView.getSelectedItem().toString());
+                Log.d("PARA", mAgeView.getSelectedItem().toString());
+                SearchProvider.search(Shelter.getShelterList(), mNameView.getText().toString(),mGenderView.getSelectedItem().toString(), mAgeView.getSelectedItem().toString());
+                startActivity(new Intent(ShelterSearchActivity.this, ShelterResultsActivity.class));
             }
         });
 

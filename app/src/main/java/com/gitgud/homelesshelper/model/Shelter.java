@@ -1,5 +1,6 @@
 package com.gitgud.homelesshelper.model;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -8,7 +9,9 @@ import java.util.ArrayList;
  * Created by csaet on 2/24/2018.
  */
 
-public class Shelter {
+public class Shelter implements Comparable<Shelter>{
+
+
 
     private static ArrayList<Shelter> shelterList = new ArrayList<>();
     public static String SHELTER_NAME = "shelter_name";
@@ -87,6 +90,7 @@ public class Shelter {
         return shelterList;
     }
 
+
     public static Shelter findShelter(String id) {
         return shelterList.get(Integer.parseInt(id));
     }
@@ -94,5 +98,10 @@ public class Shelter {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public int compareTo(@NonNull Shelter o) {
+        return this.getName().compareTo(o.getName());
     }
 }

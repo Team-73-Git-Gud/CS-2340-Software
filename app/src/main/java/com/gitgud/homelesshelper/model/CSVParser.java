@@ -118,6 +118,7 @@ public class CSVParser {
 
                 shelterList.add(new Shelter(finalData[0], finalData[1], finalData[2], finalData[3],
                         finalData[4], finalData[5], finalData[6], finalData[7], finalData[8]));
+
             }
             bReader.close();
 

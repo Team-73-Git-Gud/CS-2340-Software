@@ -6,9 +6,9 @@ package com.gitgud.homelesshelper.model;
 
 public enum AgeEnum {
     ANYONE ("Anyone"),
-    FAMILYNEWBORN ("Family/Newborn"),
+    FAMILIES_AND_NEWBORNS ("Family/Newborn"),
     CHILDREN ("Children"),
-    YOUNGADULTS ("Young Adults");
+    YOUNG_ADULTS ("Young Adults");
     private final String text;
     AgeEnum(String text){
         this.text=text;

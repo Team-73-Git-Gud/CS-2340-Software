@@ -8,69 +8,57 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
-
+import android.widget.Button;
 import com.gitgud.homelesshelper.R;
 import com.gitgud.homelesshelper.model.SearchProvider;
 import com.gitgud.homelesshelper.model.Shelter;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Collections;
 
-public class ShelterViewActivity extends AppCompatActivity {
+public class ShelterResultsActivity extends AppCompatActivity {
 
-    RecyclerView shelterRecycle;
+    RecyclerView shelterRecycle1;
     private RecyclerView.LayoutManager layoutManager;
-
-    private Button mSearchButton;
-
-    private ArrayList<Shelter> list = Shelter.getShelterList();
-
+    private Button returnbutton;
+    private ArrayList<Shelter> list = SearchProvider.getSearchResult();
+    private TextView nofound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shelter_view);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_shelter_results);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        shelterRecycle1 = findViewById(R.id.ShelterListView);
+        shelterRecycle1.setAdapter(new ShelterRecyclerViewAdapter(SearchProvider.getSearchResult()));
 
-        shelterRecycle = (RecyclerView) findViewById(R.id.ShelterListView);
-        final ShelterRecyclerViewAdapter shelterAdapter = new ShelterRecyclerViewAdapter(list);
-        shelterRecycle.setAdapter(shelterAdapter);
-
-        mSearchButton = findViewById(R.id.search_activity_button);
-        mSearchButton.setOnClickListener(new View.OnClickListener() {
+        returnbutton = findViewById(R.id.return_button);
+        returnbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ShelterViewActivity.this, ShelterSearchActivity.class));
-                list = SearchProvider.getSearchResult();
-                shelterAdapter.notifyDataSetChanged();
+                finish();
             }
         });
+
+        nofound = findViewById(R.id.textView7);
+            /*
+            if(list.size()==0) {
+                nofound.setText("                      Sorry, nothing found.");
+            }
+            */
 
     }
 
     public class ShelterRecyclerViewAdapter extends RecyclerView.Adapter<ShelterRecyclerViewAdapter.ViewHolder> {
 
-        public void updateData(ArrayList<Shelter> list) {
-            shelterList = list;
-            notifyDataSetChanged();
-        }
-
         private ArrayList<Shelter> shelterList;
 
         public ShelterRecyclerViewAdapter(ArrayList<Shelter> shelterList) {
             this.shelterList = shelterList;
+
         }
         @Override
         public ShelterRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int index) {
@@ -111,17 +99,6 @@ public class ShelterViewActivity extends AppCompatActivity {
 
         }
 
-        public void updates(ArrayList<Shelter> input)
-        {
-            if(input == null || input.size()==0)
-                return;
-            if (shelterList != null && shelterList.size()>0)
-                shelterList.clear();
-            shelterList.addAll(input);
-            Collections.sort(shelterList);
-            notifyDataSetChanged();
-        }
-
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View view;
             public final TextView shelterName;
@@ -130,7 +107,7 @@ public class ShelterViewActivity extends AppCompatActivity {
             public ViewHolder(View view) {
                 super(view);
                 this.view = view;
-                this.shelterName = (TextView) view.findViewById(R.id.name);
+                this.shelterName = view.findViewById(R.id.name);
             }
         }
 
@@ -142,4 +119,3 @@ public class ShelterViewActivity extends AppCompatActivity {
     }
 
 }
-
