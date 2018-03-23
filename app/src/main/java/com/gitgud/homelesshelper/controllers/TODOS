@@ -1,0 +1,11 @@
+a list of to do s
+
+created by mac
+
+1. need to add users to firebase
+2. need to rewrite the errors in ValidationUtil so that we check contains and indexof through firebase
+3. need to be able to find the users in firebase to have a current user
+4. add buttons to book
+5. do booking logic in firebase
+
+app

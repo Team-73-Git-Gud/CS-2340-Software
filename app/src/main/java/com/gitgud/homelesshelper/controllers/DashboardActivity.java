@@ -56,9 +56,11 @@ public class DashboardActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         type = (TextView) findViewById(R.id.textView3);
-        type.setText(User.getClasss());
+        //MAC COMMENT
+        //my thought is to have a static current user across the whole project and pull things from it
+        type.setText(currentUser.getclass());
         name = (TextView) findViewById(R.id.textView4);
-        name.setText(User.getName());
+        name.setText(currentUser.getName());
 
         logoutButton = (Button) findViewById(R.id.buttonLogout);
         logoutButton.setOnClickListener(new View.OnClickListener() {

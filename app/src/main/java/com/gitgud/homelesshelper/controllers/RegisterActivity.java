@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.gitgud.homelesshelper.R;
 import com.gitgud.homelesshelper.model.User;
+import com.gitgud.homelesshelper.model.ValidationUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         emailAddressView = (EditText) findViewById(R.id.email_address);
-        usernameView = EditText) findViewById(R.id.username);
+        usernameView = (EditText) findViewById(R.id.username);
         nameView = (EditText) findViewById(R.id.name);
         passwordView = (EditText) findViewById(R.id.password);
         registerButtonView = (Button) findViewById(R.id.register_button);
@@ -77,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<String> classificationAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, User.legalClassification);
+        ArrayAdapter<String> classificationAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, ValidationUtils.legalClassification);
         classificationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         classification.setAdapter(classificationAdapter);
     }
@@ -128,14 +129,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void attemptRegistration() {
         // Todo: refactor so that the validation methods to user are instead in ValidationUtils
-        if ((User.isEnterableUsername(emailAddressView.getText().toString())) && (User.isEnterablePassword(passwordView.getText().toString())) && ! nameView.getText().toString().equals("nameView")) {
-            User.setPassword(passwordView.getText().toString());
-            User.setUserName(emailAddressView.getText().toString());
-            User.setName(nameView.getText().toString());
-            User.setClassification(classification.getSelectedItem().toString());
-            if (nameView.getText().toString().equals("nameView")) {
-                User.setName(nameView.getText().toString());
-            }
+        if ((ValidationUtils.isValidUser(emailAddressView.getText().toString(), passwordView.getText().toString()) && !nameView.getText().toString().equals("name"))) {
+            User s = new User(emailAddressView.getText().toString(), usernameView.getText().toString(), passwordView.getText().toString(), nameView.getText().toString(), classification.getSelectedItem().toString());
+
             //startActivity(new Intent(RegisterActivity.this, LoadingScreenActivity.class));
             emailAddressView.setText("validated");
             nameView.setText("validated");
@@ -144,20 +140,20 @@ public class RegisterActivity extends AppCompatActivity {
             if (emailAddressView.getText().toString().equals("validated")
                     && nameView.getText().toString().equals("validated")
                     && passwordView.getText().toString().equals("validated")) {
-
+                finish();
             }
 
 
         } else {
-            if (! User.isEnterablePassword(passwordView.getText().toString())) {
-               passwordView.setText("Invalid Password");
+            if (!ValidationUtils.isValidPassword(passwordView.getText().toString())) {
+                passwordView.setText("Invalid Password");
 
             }
-            if (! User.isEnterableUsername(emailAddressView.getText().toString())){
-               emailAddressView.setText("Invalid Username");
+            if (!ValidationUtils.isValidUsername(emailAddressView.getText().toString())) {
+                emailAddressView.setText("Invalid Username");
             }
-            if (nameView.getText().toString().equals("nameView")) {
-               nameView.setText("Invalid Name");
+            if (nameView.getText().toString().equals("name")) {
+                nameView.setText("Invalid Name");
             }
 
             //Todo: Needs to kickoff this is entered text is valid
@@ -166,6 +162,7 @@ public class RegisterActivity extends AppCompatActivity {
             mAuthTask.execute((Void) null);
 
         }
+
 
         class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
 

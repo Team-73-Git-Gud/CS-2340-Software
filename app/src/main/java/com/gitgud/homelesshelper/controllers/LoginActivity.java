@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.gitgud.homelesshelper.R;
 import com.gitgud.homelesshelper.model.User;
 
+import com.gitgud.homelesshelper.model.ValidationUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,6 +47,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity {
 
+    //MAC IDEA have a current user here that other classes can pull info from
+    static User currentUser = null;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -148,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        if (! (User.isValidPassword(password)) || ! (User.isValidUsername(email)) || ! (User.isValidCombination(email, password)) ) {
+        if (! (ValidationUtils.isValidPassword(password)) || ! (ValidationUtils.isValidUsername(email)) || ! (ValidationUtils.isValidCombination(email, password)) ) {
             mEmailView.setError("this username/password combination isnt valid");
             focusView = mEmailView;
             cancel = true;
@@ -160,6 +163,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
+            currentUser = user to be gotten from firebase;
             showProgress(true);
             mAuthTask = new LoginActivity.UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
