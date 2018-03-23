@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by csaet on 2/21/2018.
+ * Created by csaetei on 2/21/2018.
  */
 
 public class User {
@@ -21,7 +21,6 @@ public class User {
     private static List<String> namelist = new ArrayList<String>();
     private static List<String> classificationList = new ArrayList<>();
     public static List<String> legalClassification = Arrays.asList("User", "Admin");
-
 
 
 
@@ -107,29 +106,5 @@ public class User {
     return list;
     }
 
-    public static boolean isValidUsername(String s) {
-        return  usernamelist.contains(s) && s.length() > 4 &&  s.contains("@");
-    }
 
-    public static boolean isValidPassword(String s) {
-        return  passwordlist.contains(s) && s.length() > 4;
-    }
-
-    public static boolean isEnterablePassword(String s) {
-        return  ! passwordlist.contains(s) && s.length() > 4;
-    }
-
-    public static boolean isEnterableUsername(String s) {
-        return  (! (usernamelist.contains(s))) && s.length() > 4 &&  s.contains("@");
-    }
-
-    public static int indexOfUser(String s) {
-        return usernamelist.indexOf(s);
-    }
-
-
-
-    public static boolean isValidCombination(String s, String t) {
-        return usernamelist.indexOf(s) == passwordlist.indexOf(t);
-    }
 }
