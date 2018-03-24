@@ -16,11 +16,41 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+//import com.google.firebase.auth.FirebaseAuth;
+//import com.google.firebase.auth.FirebaseUser;
+//import com.google.firebase.database.DataSnapshot;
+//import com.google.firebase.database.DatabaseError;
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
+//import com.google.firebase.database.ValueEventListener;
+//import com.google.firebase.auth.FirebaseAuth;
+//import com.google.firebase.auth.FirebaseUser;
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
+//import com.google.firebase.database.ChildEventListener;
+//import com.google.firebase.database.DataSnapshot;
+//import com.google.firebase.database.DatabaseError;
+//import com.google.firebase.database.FirebaseDatabase;
 
+
+import com.firebase.client.Firebase;
 import com.gitgud.homelesshelper.R;
+import com.gitgud.homelesshelper.model.FirebaseInterface;
 import com.gitgud.homelesshelper.model.User;
+import com.gitgud.homelesshelper.model.UserAuthentication;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class RegisterActivity extends AppCompatActivity {
+    private Firebase mRef;
 
     private EditText emailAddress;
     private EditText password;
@@ -35,10 +65,36 @@ public class RegisterActivity extends AppCompatActivity {
 
     private LoginActivity.UserLoginTask mAuthTask = null;
 
+    final List<User> tempList= new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        FirebaseApp.initializeApp(this);
+
+        Firebase.setAndroidContext(this);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference();
+        databaseReference.child("Users").addValueEventListener(new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
+                for(DataSnapshot child: children) {
+                    if(child != null) {
+                        User user = (User) child.getValue(User.class);
+                        tempList.add(user);
+                    }
+                }
+                UserAuthentication.setList((ArrayList<User>) tempList);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         emailAddress = (EditText) findViewById(R.id.EmailAddress);
         password = (EditText) findViewById(R.id.password);
@@ -62,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, User.legalClassification);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, UserAuthentication.legalClassification);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         classification.setAdapter(adapter);
 
@@ -71,14 +127,19 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void attemptRegistration() {
 
-        if ((User.isEnterableUsername(emailAddress.getText().toString())) && (User.isEnterablePassword(password.getText().toString())) && ! name.getText().toString().equals("name")) {
-            User.setPassword(password.getText().toString());
-            User.setUserName(emailAddress.getText().toString());
-            User.setName(name.getText().toString());
-            User.setClassification(classification.getSelectedItem().toString());
-            if (name.getText().toString().equals("name")) {
-                User.setName(name.getText().toString());
-            }
+        if ((UserAuthentication.isValidUser(emailAddress.getText().toString(), password.getText().toString())&& ! name.getText().toString().equals("name"))){
+
+            Firebase.setAndroidContext(this);
+            mRef = new Firebase("https://cs-2340-software.firebaseio.com/");
+            Firebase mRef2 = mRef.child("Users");
+
+            User s = new User(emailAddress.getText().toString(), password.getText().toString(), name.getText().toString(), classification.getSelectedItem().toString());
+            //FirebaseInterface.addUser(s);
+            Firebase mRefChild = mRef2.child(s.getpassWord());
+            mRefChild.setValue(s);
+
+
+
             //startActivity(new Intent(RegisterActivity.this, LoadingScreenActivity.class));
             emailAddress.setText("validated");
             name.setText("validated");
@@ -92,11 +153,11 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         } else {
-           if (! User.isEnterablePassword(password.getText().toString())) {
+           if (! UserAuthentication.isValidPassword(password.getText().toString())) {
                password.setText("Invalid Password");
 
            }
-           if (! User.isEnterableUsername(emailAddress.getText().toString())){
+           if (! UserAuthentication.isValidUsername(emailAddress.getText().toString())){
                emailAddress.setText("Invalid Username");
            }
            if (name.getText().toString().equals("name")) {

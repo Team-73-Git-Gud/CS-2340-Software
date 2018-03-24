@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "297847957115",
+    "firebase_url": "https://cs-2340-software.firebaseio.com",
+    "project_id": "cs-2340-software",
+    "storage_bucket": "cs-2340-software.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297847957115:android:39d4a64a17a366b2",
+        "android_client_info": {
+          "package_name": "com.gitgud.homelesshelper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297847957115-5pn1rvrrfcu2pdq58h3lco0kqok89h9a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gitgud.homelesshelper",
+            "certificate_hash": "f93b73f8c57bb8408e6a815828f7c225190f79e9"
+          }
+        },
+        {
+          "client_id": "297847957115-govmjsqqlfvfic37htplqp4ng5r9ot0m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvF0SAsrPpORPzk1WANlYIvHQ_gIpbTyI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297847957115-govmjsqqlfvfic37htplqp4ng5r9ot0m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

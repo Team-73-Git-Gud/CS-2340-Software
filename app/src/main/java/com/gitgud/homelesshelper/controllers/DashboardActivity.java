@@ -31,6 +31,8 @@ import com.google.firebase.database.DatabaseError;
 import java.util.Random;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static com.gitgud.homelesshelper.controllers.LoginActivity.currentUser;
+
 /**
  * Created by collin on 2/13/18.
  */
@@ -49,6 +51,7 @@ public class DashboardActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         //Database Stuff
         Firebase.setAndroidContext(this);
         mRef = new Firebase("https://cs-2340-software.firebaseio.com/");
@@ -56,9 +59,9 @@ public class DashboardActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         type = (TextView) findViewById(R.id.textView3);
-        type.setText(User.getClasss());
+        type.setText(currentUser.getclasss());
         name = (TextView) findViewById(R.id.textView4);
-        name.setText(User.getName());
+        name.setText(currentUser.getname());
 
         logoutButton = (Button) findViewById(R.id.buttonLogout);
         logoutButton.setOnClickListener(new View.OnClickListener() {

@@ -33,8 +33,16 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.firebase.client.Firebase;
 import com.gitgud.homelesshelper.R;
 import com.gitgud.homelesshelper.model.User;
+import com.gitgud.homelesshelper.model.UserAuthentication;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -43,7 +51,10 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+    private Firebase mRef;
+    final List<User> tempList= new ArrayList<>();
 
+    public static User currentUser;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -74,6 +85,32 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        FirebaseApp.initializeApp(this);
+
+        Firebase.setAndroidContext(this);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference();
+        databaseReference.child("Users").addValueEventListener(new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
+                for(DataSnapshot child: children) {
+                    if(child != null) {
+                        User user = (User) child.getValue(User.class);
+                        tempList.add(user);
+                    }
+                }
+                UserAuthentication.setList((ArrayList<User>) tempList);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        Firebase.setAndroidContext(this);
+        mRef = new Firebase("https://cs-2340-software.firebaseio.com/");
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -192,7 +229,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cancel = true;
         }
 
-        if (! (User.isValidPassword(password)) || ! (User.isValidUsername(email)) || ! (User.isValidCombination(email, password)) ) {
+        if ( (UserAuthentication.isValidPassword(password)) ||  (UserAuthentication.isValidUsername(email)) || ! (UserAuthentication.isValidCombination(password, email)) ) {
             mEmailView.setError("this username/password combination isnt valid");
             focusView = mEmailView;
             cancel = true;
@@ -205,8 +242,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            User.setClass(User.indexOfUser(email));
-            User.setName(User.indexOfUser(email));
+            currentUser = UserAuthentication.getCurrentUser(email);//PULL THE USER FROM FIREBASE
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
