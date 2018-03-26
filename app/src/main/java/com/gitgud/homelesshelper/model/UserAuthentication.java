@@ -40,7 +40,7 @@ public class UserAuthentication {
         //need a firebase already has tbis username in it
         boolean isValid = true;
         for(User user : permanence) {
-            Log.d("username", user.getuserName());
+            //Log.d("username", user.getuserName());
             if(user.getuserName().equals(s)) {
                 isValid = false;
             }
@@ -49,7 +49,7 @@ public class UserAuthentication {
         if(isValid) {
             test = "true";
         }
-        Log.d("validity", test);
+        //Log.d("validity", test);
         return isValid && s.length() > 4 &&  s.contains("@");
     }
 
@@ -59,7 +59,7 @@ public class UserAuthentication {
         //final DatabaseReference dinosaursRef = database.getReference(s);
         boolean isValid = true;
         for(User user : permanence) {
-            Log.d("password", user.getpassWord());
+            //Log.d("password", user.getpassWord());
             if(user.getpassWord().equals(s)) {
                 isValid = false;
             }
