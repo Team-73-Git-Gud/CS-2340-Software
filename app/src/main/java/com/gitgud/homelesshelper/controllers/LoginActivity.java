@@ -243,6 +243,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             currentUser = UserAuthentication.getCurrentUser(email);//PULL THE USER FROM FIREBASE
+            User.setCurrentUser(currentUser);
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);

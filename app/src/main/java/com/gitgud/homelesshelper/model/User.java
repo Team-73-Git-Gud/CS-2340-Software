@@ -16,8 +16,11 @@ public class User {
     //private String id;
     private String classs;
     private String name;
-    private int numReserved;
+    private int numFamilyReserved;
+    private int numIndividualReserved;
     private String ShelterReserved;
+    private boolean hasReservation;
+    private static User currentUser;
 
 
 
@@ -30,7 +33,6 @@ public class User {
         this.classs = Class;
         this.name = name;
         this.email = null;
-        numReserved = 0;
         ShelterReserved = "";
         //add to firebase
     }
@@ -51,13 +53,18 @@ public class User {
         return classs;
     }
 
+    public int getNumFamilyReserved() {
+        return numFamilyReserved;
+    }
+
+    public int getNumIndividualReserved() {
+        return numIndividualReserved;
+    }
+
     public String getemail() {
         return email;
     }
 
-    public int getnumReserved() {
-        return numReserved;
-    }
 
     public String getShelterReserved() {
         return ShelterReserved;
@@ -83,17 +90,35 @@ public class User {
         email = s;
     }
 
-    public void setnumReserved(int i) {
-        numReserved = i;
-    }
-
     public void setShelterReserved(String s) {
         ShelterReserved = s;
     }
 
+    public void setNumFamilyReserved(int numFamilyReserved) {
+        this.numFamilyReserved = numFamilyReserved;
+    }
 
+    public void setNumIndividualReserved(int numIndividualReserved) {
+        this.numIndividualReserved = numIndividualReserved;
+    }
 
-//    public String getUserName() {
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User currentUser) {
+        User.currentUser = currentUser;
+    }
+
+    public boolean isHasReservation() {
+        return hasReservation;
+    }
+
+    public void setHasReservation(boolean hasReservation) {
+        this.hasReservation = hasReservation;
+    }
+
+    //    public String getUserName() {
 //        return userName;
 //    }
 //
