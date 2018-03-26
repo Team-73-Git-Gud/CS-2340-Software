@@ -88,6 +88,7 @@ import com.firebase.client.Firebase;
 import com.gitgud.homelesshelper.R;
 import com.gitgud.homelesshelper.model.Shelter;
 import com.gitgud.homelesshelper.model.User;
+import com.gitgud.homelesshelper.model.UserAuthentication;
 
 import org.w3c.dom.Text;
 
@@ -184,6 +185,19 @@ public class ShelterDetailActivity extends AppCompatActivity {
                     User.getCurrentUser().setHasReservation(true);
                     User.getCurrentUser().setNumFamilyReserved(familyReservations);
                     User.getCurrentUser().setNumIndividualReserved(individualReservations);
+
+//                    ArrayList<User> userlist = UserAuthentication.getList();
+//                    for (User use: userlist) {
+//                        if (use.getname().equals(User.getCurrentUser().getname())) {
+//                            use = User.getCurrentUser();
+//                        }
+//                    }
+
+                    mRef = new Firebase("https://cs-2340-software.firebaseio.com/");
+                    Firebase mRef2 = mRef.child("Users");
+                    Firebase mRefChild = mRef2.child(User.getCurrentUser().getpassWord());
+                    mRefChild.setValue(User.getCurrentUser());
+
                     ArrayList<Shelter> list = getShelterList();
                     for (Shelter shell: list) {
                         if (shell.getName().equals(shelter.getName())) {
@@ -192,7 +206,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
                         }
                     }
                     Shelter.setShelterList(list);
-                    Firebase mRefChild = mRef.child("Shelter");
+                    mRefChild = mRef.child("Shelter");
                     mRefChild.setValue(getShelterList());
                     reserveButton.setText((User.getCurrentUser().isHasReservation())? "Cancel Reservation": "Reserve");
 
@@ -209,6 +223,11 @@ public class ShelterDetailActivity extends AppCompatActivity {
                     User.getCurrentUser().setNumFamilyReserved(0);
                     User.getCurrentUser().setNumIndividualReserved(0);
                     User.getCurrentUser().setShelterReserved("");
+                    mRef = new Firebase("https://cs-2340-software.firebaseio.com/");
+                    Firebase mRef2 = mRef.child("Users");
+                    Firebase mRefChild = mRef2.child(User.getCurrentUser().getpassWord());
+                    mRefChild.setValue(User.getCurrentUser());
+
                     ArrayList<Shelter> list = getShelterList();
                     for (Shelter shell: list) {
                         if (shell.getName().equals(shelter.getName())) {
@@ -217,7 +236,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
                         }
                     }
                     Shelter.setShelterList(list);
-                    Firebase mRefChild = mRef.child("Shelter");
+                    mRefChild = mRef.child("Shelter");
 
                     mRefChild.setValue(getShelterList());
                     reserveButton.setText((User.getCurrentUser().isHasReservation())? "Cancel Reservation": "Reserve");

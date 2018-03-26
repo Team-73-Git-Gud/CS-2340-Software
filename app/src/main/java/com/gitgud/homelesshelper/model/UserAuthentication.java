@@ -74,6 +74,10 @@ public class UserAuthentication {
         permanence = l;
     }
 
+    public static ArrayList<User> getList() {
+        return permanence;
+    }
+
     public static boolean isValidCombination(String s, String t) {
         //need a firebase on same user line
         boolean isValid = false;
