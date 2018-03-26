@@ -150,8 +150,8 @@ public class Shelter implements Comparable<Shelter>{
     private String number;
     private int individual;
     private int family;
-    private int[] familyArray = new int[] {0, 1, 2, 3};
-    private int[] individualArray = new int[] {0, 1, 2, 3};
+    private int[] familyArray = new int[] {1, 2, 3};
+    private int[] individualArray = new int[] {1, 2, 3};
 
     public Shelter(String id, String name, String capacity, String restriction, String longitude,
                    String latitude, String address, String notes, String number){
@@ -290,9 +290,9 @@ public class Shelter implements Comparable<Shelter>{
 
     public void reserveFamily(int amount) {
         this.family -= amount;
-        if (this.family < 4) {
+        if (this.family < 3) {
             int[] temp = new int[family];
-            for (int i = 0; i < temp.length; i++) {
+            for (int i = 1; i < temp.length; i++) {
                 temp[i] = i;
             }
             familyArray = temp;
@@ -301,9 +301,9 @@ public class Shelter implements Comparable<Shelter>{
 
     public void reserveIndividual(int amount) {
         this.individual -= amount;
-        if (this.individual < 4) {
+        if (this.individual < 3) {
             int[] temp = new int[individual];
-            for (int i = 0; i < temp.length; i++) {
+            for (int i = 1; i < temp.length; i++) {
                 temp[i] = i;
             }
             individualArray = temp;
