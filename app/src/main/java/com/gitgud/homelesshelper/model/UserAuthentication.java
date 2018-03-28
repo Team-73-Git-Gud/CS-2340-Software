@@ -79,6 +79,9 @@ public class UserAuthentication {
     }
 
     public static boolean isValidCombination(String s, String t) {
+        if (s == null || t == null) {
+            throw new IllegalArgumentException("the password and username cannot be null");
+        }
         //need a firebase on same user line
         boolean isValid = false;
         for(User user : permanence) {
