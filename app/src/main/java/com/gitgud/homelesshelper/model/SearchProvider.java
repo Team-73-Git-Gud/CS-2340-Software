@@ -31,6 +31,10 @@ public class SearchProvider {
             genderString = null;
         }
         //for age
+
+        if(ageField.contains("NO_RESTRICTIONS")){
+            ageString = "";
+        }
         if (ageField.contains("ANYONE")) {
             ageString = "anyone";
         }
@@ -77,7 +81,6 @@ public class SearchProvider {
             Log.d("LOOP", "------------------------");
         }
     }
-
 
 
 

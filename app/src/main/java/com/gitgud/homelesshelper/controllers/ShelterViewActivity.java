@@ -32,6 +32,7 @@ public class ShelterViewActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
 
     private Button mSearchButton;
+    private Button mMapButton;
 
     private ArrayList<Shelter> list = Shelter.getShelterList();
 
@@ -55,6 +56,14 @@ public class ShelterViewActivity extends AppCompatActivity {
                 startActivity(new Intent(ShelterViewActivity.this, ShelterSearchActivity.class));
                 list = SearchProvider.getSearchResult();
                 shelterAdapter.notifyDataSetChanged();
+            }
+        });
+
+        mMapButton = findViewById(R.id.viewmapbutton);
+        mMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ShelterViewActivity.this, DefaultMapActivity.class));
             }
         });
 

@@ -5,6 +5,7 @@ package com.gitgud.homelesshelper.model;
  */
 
 public enum AgeEnum {
+    NO_RESTRICTIONS ("No Restrictions"),
     ANYONE ("Anyone"),
     FAMILIES_AND_NEWBORNS ("Family/Newborn"),
     CHILDREN ("Children"),

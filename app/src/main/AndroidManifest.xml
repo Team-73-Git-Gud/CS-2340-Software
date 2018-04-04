@@ -7,6 +7,17 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <permission android:name="com.gitgud.homelesshelper.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.gitgud.homelesshelper.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.google.android.provider.gsf.permissions.READ_GSERVICES" />
+
+    <uses-feature android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -53,6 +64,21 @@
             android:name=".controllers.ShelterResultsActivity"
             android:label="SearchResults"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".controllers.DefaultMapActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".controllers.SearchMapActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyB6qdEwnzR0Jk_X0c62PVZn3C9ENh7eySE" />
+
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
     </application>
 

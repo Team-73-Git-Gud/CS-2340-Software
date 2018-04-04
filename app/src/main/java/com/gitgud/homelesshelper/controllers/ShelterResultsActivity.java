@@ -23,6 +23,7 @@ public class ShelterResultsActivity extends AppCompatActivity {
     RecyclerView shelterRecycle1;
     private RecyclerView.LayoutManager layoutManager;
     private Button returnbutton;
+    private Button searchmapbutton;
     private ArrayList<Shelter> list = SearchProvider.getSearchResult();
     private TextView nofound;
     @Override
@@ -40,6 +41,14 @@ public class ShelterResultsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        searchmapbutton = findViewById(R.id.viewsearchmapbutton);
+        searchmapbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ShelterResultsActivity.this, SearchMapActivity.class));
             }
         });
 

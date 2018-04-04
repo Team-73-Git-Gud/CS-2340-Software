@@ -32,6 +32,12 @@ tools:context="com.gitgud.homelesshelper.controllers.ShelterViewActivity">
                 android:layout_weight="1"
                 android:text="Return" />
 
+            <Button
+                android:id="@+id/viewsearchmapbutton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Map" />
+
         </android.support.design.widget.AppBarLayout>
 
         <FrameLayout
